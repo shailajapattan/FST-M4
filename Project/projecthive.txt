@@ -1,0 +1,45 @@
+
+CREATE TABLE episode4 (name STRING, linespoken STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t';
+
+
+ LOAD DATA LOCAL INPATH '/episodeIV_dialouges.txt' INTO TABLE episode4;
+
+
+SELECT name, COUNT(*) as linecount FROM episode4 GROUP BY name ORDER BY linecount DESC;
+
+INSERT OVERWRITE LOCAL DIRECTORY '/export4' ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' SELECT name, COUNT(*) as linecount FROM office.episode4 GROUP BY name ORDER BY linecount DESC;
+---------------------------------------------------------------------------------------------------------------------------------
+container id
+9a5ffa34fdb0
+
+
+CREATE TABLE episode5 (name STRING, linespoken STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t';
+
+LOAD DATA LOCAL INPATH '/episodeV_dialouges.txt' INTO TABLE episode5;
+
+SELECT name, COUNT(*) as linecount FROM episode5 GROUP BY name ORDER BY linecount DESC;
+
+INSERT OVERWRITE LOCAL DIRECTORY '/export5' ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' SELECT name, COUNT(*) as linecount FROM office.episode5 GROUP BY name ORDER BY linecount DESC;
+
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+CREATE TABLE episode6 (name STRING, linespoken STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t';
+
+LOAD DATA LOCAL INPATH '/episodeVI_dialouges.txt' INTO TABLE episode6;
+
+SELECT name, COUNT(*) as linecount FROM episode6 GROUP BY name ORDER BY linecount DESC;
+
+INSERT OVERWRITE LOCAL DIRECTORY '/export6' ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' SELECT name, COUNT(*) as linecount FROM office.episode6 GROUP BY name ORDER BY linecount DESC;
+
+--------------------------------------------------------------------------------------------------------------------------
+
+--Count of Luke in EpisodeIV
+
+select count(*) from office.episode4 where INSTR(linespoken,'Luke')>0;
+
+INSERT OVERWRITE LOCAL DIRECTORY '/export8' ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' select count(*) from office.episode4 where INSTR(linespoken,'Luke')>0;
+
+
+
+
